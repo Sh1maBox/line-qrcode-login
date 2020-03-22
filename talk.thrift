@@ -48,6 +48,14 @@ struct LoginQrCode_QrCodeLoginResponse {
     4: string metaData
 }
 
+struct LoginQrCode_CheckQrCodeVerifiedRequest {
+    1: string authSessionId
+}
+struct LoginQrCode_CheckQrCodeVerifiedResponse {}
+struct LoginQrCode_CheckPinCodeVerifiedRequest {
+    1: string authSessionId
+}
+struct LoginQrCode_CheckPinCodeVerifiedResponse {}
 
 exception SecondaryQrCodeException {
     1: i32 code,
@@ -60,5 +68,10 @@ service SecondaryQrCodeLoginService {
     LoginQrCode_CreateQrCodeResponse createQrCode(1:LoginQrCode_CreateQrCodeRequest request) throws (1:SecondaryQrCodeException e),
     LoginQrCode_VerifyCertificateResponse verifyCertificate(1:LoginQrCode_VerifyCertificateRequest request) throws (1:SecondaryQrCodeException e),
     LoginQrCode_CreatePinCodeResponse createPinCode(1:LoginQrCode_CreatePinCodeRequest request) throws (1:SecondaryQrCodeException e),
-    LoginQrCode_QrCodeLoginRequest qrCodeLogin(1:LoginQrCode_QrCodeLoginRequest request) throws (1:SecondaryQrCodeException e)
+    LoginQrCode_QrCodeLoginResponse qrCodeLogin(1:LoginQrCode_QrCodeLoginRequest request) throws (1:SecondaryQrCodeException e)
+}
+
+service LoginPermitNoticeService {
+    LoginQrCode_CheckQrCodeVerifiedResponse checkQrCodeVerified(1:LoginQrCode_CheckQrCodeVerifiedRequest request) throws (1:SecondaryQrCodeException e),
+    LoginQrCode_CheckPinCodeVerifiedResponse checkPinCodeVerified(1:LoginQrCode_CheckPinCodeVerifiedRequest request) throws (1:SecondaryQrCodeException e),
 }
